@@ -3,7 +3,7 @@
 // console.log('hello');
 
 //Global Variables 
-// let votesAllowed = 5; 
+// let votesAllowed = 8; 
 let votesAllowed = 25; 
 
 //Product storage
@@ -59,22 +59,38 @@ function getRandomIndex(){
 
 let randomNums = []; 
 
+
+
+// function getRandomNums(){ 
+//   for (let i = 0; i < 3; i++){
+//     let currentNum = Math.floor(Math.random() * allProducts.length);
+//     while (!randomNums.includes(currentNum)){
+//         randomNums.push(currentNum); 
+//     }
+//   }
+// }
+
 function getRandomNums(){
-  for (let i = 0; i < 4; i++){
-    let currentNum = Math.floor(Math.random() * allProducts.length);
-    while (!randomNums.includes(currentNum)){
-        randomNums.push(currentNum); 
+  while(randomNums.length < 6){
+    let trialNum = getRandomIndex(); 
+    while(!randomNums.includes(trialNum)){
+      randomNums.push(trialNum); 
     }
   }
 }
 
+//perhaps change the below renderProducts to shift, compare within an array of 6 indexes to see if initial 3 are repeated at all in next 3 (push, shift)
 
 //render images 
 function renderProducts(){
   getRandomNums();
-  let productOneIndex = randomNums.pop(); 
-  let productTwoIndex = randomNums.pop(); 
-  let productThreeIndex = randomNums.pop(); 
+  // let productOneIndex = randomNums.pop(); 
+  // let productTwoIndex = randomNums.pop(); 
+  // let productThreeIndex = randomNums.pop(); 
+
+  let productOneIndex = randomNums.shift(); 
+  let productTwoIndex = randomNums.shift(); 
+  let productThreeIndex = randomNums.shift(); 
 
   imgOne.src = allProducts[productOneIndex].src;
   imgOne.alt = allProducts[productOneIndex].name;
