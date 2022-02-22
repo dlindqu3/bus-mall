@@ -3,8 +3,8 @@
 // console.log('hello');
 
 //Global Variables 
-// let votesAllowed = 8; 
-let votesAllowed = 25; 
+let votesAllowed = 5; 
+// let votesAllowed = 25; 
 
 //Product storage
 let allProducts = []; 
@@ -131,10 +131,114 @@ function handleShowResults(){
       let li = document.createElement('li'); 
       li.textContent = `${allProducts[i].name} had ${allProducts[i].clicks} votes, and was seen ${allProducts[i].views} times.`
       showResults.appendChild(li); 
-    }
+    }   
+  }
+  getViewsData();
+  getClicksData(); 
+  renderChart(); 
+}
+
+let namesArr = [];
+
+function getNames (){
+  for (let i = 0; i < allProducts.length; i++){
+    namesArr.push(allProducts[i].name); 
   }
 }
+getNames();
+
+console.log(namesArr); 
+
+//chart 
+function renderChart(){
+  
+let chartData = {
+  type: 'bar',
+  data: {
+      labels: namesArr,
+      datasets: [{
+          label: '# of Views',
+          data: viewsArr,
+          backgroundColor: 'red',
+          borderColor: 'black',
+          borderWidth: 1
+      },
+      {
+        label: '# of Clicks',
+        data: clicksArr,
+        backgroundColor: 'blue',
+        borderColor: 'black',
+        borderWidth: 1
+    }]
+  },
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+}
+new Chart(ctx, chartData);
+}
+
+
+let clicksArr = [];
+let viewsArr = []; 
+
+function getClicksData(){ 
+  for (let i = 0; i < allProducts.length; i++){
+    clicksArr.push(allProducts[i].clicks); 
+  }
+  console.log(clicksArr); 
+}
+
+
+
+function getViewsData(){
+  for (let i = 0; i < allProducts.length; i++){
+    viewsArr.push(allProducts[i].views);
+  }
+  console.log(viewsArr); 
+}
+
+
+const ctx = document.getElementById('my-chart').getContext('2d');
+
+// let chartData = {
+//   type: 'bar',
+//   data: {
+//       labels: allProducts,
+//       datasets: [{
+//           label: '# of Views',
+//           data: viewsArr,
+//           backgroundColor: 'red',
+//           borderColor: 'black',
+//           borderWidth: 1
+//       },
+//       {
+//         label: '# of Clicks',
+//         data: clicksArr,
+//         backgroundColor: 'blue',
+//         borderColor: 'black',
+//         borderWidth: 1
+//     }]
+//   },
+//   options: {
+//       scales: {
+//           y: {
+//               beginAtZero: true
+//           }
+//       }
+//   }
+// }
+
+// const myChart = new Chart(ctx, chartData);
+
+
+
+
 
 //step 2: grab what we listen to 
 myContainer.addEventListener('click', handleClicks); 
-resultsBtn.addEventListener('click', handleShowResults); 
+resultsBtn.addEventListener('click', handleShowResults);; 
