@@ -3,8 +3,8 @@
 // console.log('hello');
 
 //Global Variables 
-// let votesAllowed = 5; 
-let votesAllowed = 25; 
+let votesAllowed = 8; 
+// let votesAllowed = 25; 
 
 //Product storage
 let allProducts = []; 
@@ -18,6 +18,15 @@ console.log(imgOne);
 let resultsBtn = document.getElementById('show-results-btn'); 
 let showResults = document.getElementById('show-results-list'); 
 
+//local storage: 
+//local storage step 3: get it out of local storage 
+let retrievedProducts = localStorage.getItem('products'); 
+console.log(retrievedProducts); 
+
+//local storage step 4: parse the data 
+let parsedProducts = JSON.parse(retrievedProducts);
+console.log('parsed products', parsedProducts);
+
 //Constructor (name, filepath of img, times shown)
 function Product (name, fileExtension='jpg'){
   this.name = name; 
@@ -27,6 +36,11 @@ function Product (name, fileExtension='jpg'){
   allProducts.push(this);
 }
 
+//local storage: 
+//local storage step 5: use the data that we got from localStorage
+if(retrievedProducts){
+  allProducts = parsedProducts; 
+} else {
 new Product('bag'); 
 new Product('banana'); 
 new Product('bathroom'); 
@@ -46,6 +60,7 @@ new Product('tauntaun');
 new Product('unicorn'); 
 new Product('water-can'); 
 new Product('wine-glass'); 
+}
 
 console.log(allProducts); 
 
@@ -124,6 +139,15 @@ function handleClicks(event){
 if (votesAllowed === 0){
   myContainer.removeEventListener('click', handleClicks);
 }
+
+//local storage begins 
+//local storage step 1: stringify our data 
+let stringifiedProducts = JSON.stringify(allProducts); 
+console.log('stringified products ', stringifiedProducts); 
+
+//local storage step 2: set the item into local storage
+localStorage.setItem('products', stringifiedProducts); 
+
 
 function handleShowResults(){
   if(votesAllowed === 0){
