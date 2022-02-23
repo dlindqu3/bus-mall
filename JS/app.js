@@ -3,8 +3,8 @@
 // console.log('hello');
 
 //Global Variables 
-let votesAllowed = 5; 
-// let votesAllowed = 25; 
+// let votesAllowed = 5; 
+let votesAllowed = 25; 
 
 //Product storage
 let allProducts = []; 
