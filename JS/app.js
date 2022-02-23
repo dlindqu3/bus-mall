@@ -126,6 +126,7 @@ renderProducts();
 function handleClicks(event){
   votesAllowed--; 
   let imgClicked = event.target.alt; 
+
   for (let i=0; i < allProducts.length; i++){
     if (imgClicked === allProducts[i].name){
       allProducts[i].clicks++; 
@@ -140,13 +141,6 @@ if (votesAllowed === 0){
   myContainer.removeEventListener('click', handleClicks);
 }
 
-//local storage begins 
-//local storage step 1: stringify our data 
-let stringifiedProducts = JSON.stringify(allProducts); 
-console.log('stringified products ', stringifiedProducts); 
-
-//local storage step 2: set the item into local storage
-localStorage.setItem('products', stringifiedProducts); 
 
 
 function handleShowResults(){
@@ -160,6 +154,15 @@ function handleShowResults(){
   getViewsData();
   getClicksData(); 
   renderChart(); 
+
+  //local storage begins 
+//local storage step 1: stringify our data 
+let stringifiedProducts = JSON.stringify(allProducts); 
+console.log('stringified products ', stringifiedProducts); 
+
+//local storage step 2: set the item into local storage
+localStorage.setItem('products', stringifiedProducts); 
+
 }
 
 let namesArr = [];
