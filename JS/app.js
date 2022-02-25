@@ -3,8 +3,8 @@
 // console.log('hello');
 
 //Global Variables 
-let votesAllowed = 8; 
-// let votesAllowed = 25; 
+// let votesAllowed = 8; 
+let votesAllowed = 25; 
 
 //Product storage
 let allProducts = []; 
@@ -125,6 +125,9 @@ renderProducts();
 //Event listeners 
 function handleClicks(event){
   votesAllowed--; 
+  if (votesAllowed === 0){
+    myContainer.removeEventListener('click', handleClicks);
+  }else {
   let imgClicked = event.target.alt; 
 
   for (let i=0; i < allProducts.length; i++){
@@ -132,14 +135,15 @@ function handleClicks(event){
       allProducts[i].clicks++; 
     }
   }
+}
   renderProducts(); 
 }
 
 
 
-if (votesAllowed === 0){
-  myContainer.removeEventListener('click', handleClicks);
-}
+// if (votesAllowed === 0){
+//   myContainer.removeEventListener('click', handleClicks);
+// }
 
 
 
@@ -151,6 +155,7 @@ function handleShowResults(){
       showResults.appendChild(li); 
     }   
   }
+  // myContainer.removeEventListener('click', handleClicks);
   getViewsData();
   getClicksData(); 
   renderChart(); 
